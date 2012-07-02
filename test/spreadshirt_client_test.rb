@@ -34,6 +34,7 @@ class SpreadshirtClientTest < Test::Unit::TestCase
 
   def test_url_for
     assert_equal "http://api.spreadshirt.net/api/v1/basket/1/items", SpreadshirtClient.url_for("/basket/1/items")
+    assert_equal "http://test.spreadshirt.net/api/v1/basket/1/items", SpreadshirtClient.url_for("http://test.spreadshirt.net/api/v1/basket/1/items")
   end
 
   def test_headers_for

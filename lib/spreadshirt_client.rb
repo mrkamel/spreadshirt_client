@@ -27,6 +27,8 @@ module SpreadshirtClient
     end
 
     def url_for(path)
+      return path if path =~ /\Ahttps?:\/\//
+
       "#{base_url}#{path}"
     end
 
