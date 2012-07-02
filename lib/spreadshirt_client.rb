@@ -1,5 +1,5 @@
 
-require "spreadshirt_client/version"
+#require "spreadshirt_client/version"
 require "rest-client"
 
 module SpreadshirtClient
@@ -35,7 +35,7 @@ module SpreadshirtClient
 
       headers[:authorization] = authorize(method_for(method_symbol), path) if options[:authorization]
 
-      headers
+      options.merge headers
     end
 
     def method_for(method_symbol)

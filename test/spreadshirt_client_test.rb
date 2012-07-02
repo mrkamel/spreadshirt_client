@@ -41,6 +41,8 @@ class SpreadshirtClientTest < Test::Unit::TestCase
 
     assert_equal [:authorization], headers.keys
     assert headers[:authorization].include?("SprdAuth")
+
+    assert_equal({ :params => { :limit => 500 } }, SpreadshirtClient.headers_for(:get, "/shops/1/articles", :params => { :limit => 500 }))
   end
 
   def test_method_for
