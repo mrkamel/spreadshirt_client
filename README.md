@@ -27,10 +27,10 @@ SpreadshirtClient.post "/baskets/[basket_id]/items", "<basketItem>...</basketIte
 SpreadshirtClient.put "/basklets/[basket_id]/items/[item_id]", "<basketItem>...</basketItem>", :authorization => true
 
 # Retrieve the checkout url for a spreadshirt basket.
-SpreadshirtClient.get "/baskets/.../checkout", :authorization => true
+SpreadshirtClient.get "/baskets/[basket_id]/checkout", :authorization => true
 
 # Retrieve a spreadshirt shop's articles.
-SpreadshirtClient.get "/shops/.../articles"
+SpreadshirtClient.get "/shops/[shop_id]/articles"
 
 ...
 </pre>
