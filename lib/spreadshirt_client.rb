@@ -4,7 +4,15 @@ require "rest-client"
 
 module SpreadshirtClient
   class << self
-    attr_accessor :api_key, :api_secret, :base_url
+    attr_accessor :api_key, :api_secret
+
+    def base_url=(base_url)
+      @base_url
+    end
+
+    def base_url
+      @base_url || "http://api.spreadshirt.net/api/v1"
+    end
 
     def authorize(method, path)
       time = Time.now.to_i

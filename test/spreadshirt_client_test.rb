@@ -6,7 +6,6 @@ class SpreadshirtClientTest < Test::Unit::TestCase
   def setup
     SpreadshirtClient.api_key = "test"
     SpreadshirtClient.api_secret = "test"
-    SpreadshirtClient.base_url = "http://api.spreadshirt.net/api/v1"
   end
 
   def test_api_key
@@ -18,7 +17,13 @@ class SpreadshirtClientTest < Test::Unit::TestCase
   end
 
   def test_base_url
-    assert_nothing_raised { SpreadshirtClient.base_url }
+    assert_equal "http://api.spreadshirt.net/api/v1", SpreadshirtClient.base_url
+
+    SpreadshirtClient.base_url = "http://test.spreadshirt.net/api/v1"
+
+    assert_equal "http://api.spreadshirt.net/api/v1", SpreadshirtClient.base_url
+
+    SpreadshirtClient.base_url = "http://api.spreadshirt.net/api/v1"
   end
 
   def test_authorize
