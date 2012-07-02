@@ -30,7 +30,7 @@ SpreadshirtClient.put "/basklets/[basket_id]/items/[item_id]", "<basketItem>...<
 SpreadshirtClient.get "/baskets/[basket_id]/checkout", :authorization => true
 
 # Retrieve a spreadshirt shop's articles.
-SpreadshirtClient.get "/shops/[shop_id]/articles"
+SpreadshirtClient.get "/shops/[shop_id]/articles", :params => { :limit => 50 }
 
 ...
 </pre>
