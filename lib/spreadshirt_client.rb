@@ -1,5 +1,5 @@
 
-#require "spreadshirt_client/version"
+require "spreadshirt_client/version"
 require "rest-client"
 
 module SpreadshirtClient
