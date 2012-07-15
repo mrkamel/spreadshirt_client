@@ -27,9 +27,15 @@ class SpreadshirtClientTest < Test::Unit::TestCase
   end
 
   def test_authorize
-    regex = /\ASprdAuth apiKey=\"test\", data=\"post http:\/\/api.spreadshirt.net\/api\/v1baskets\/1\/items [0-9]+\", sig=\"[0-9a-f]{40}\"\Z/
+    regex = /\ASprdAuth apiKey=\"test\", data=\"post http:\/\/api.spreadshirt.net\/api\/v1\/baskets\/1\/items [0-9]+\", sig=\"[0-9a-f]{40}\"\Z/
 
-    assert SpreadshirtClient.authorize(:post, "baskets/1/items") =~ regex
+    assert SpreadshirtClient.authorize(:post, "/baskets/1/items") =~ regex
+  end
+
+  def test_authorize_with_session
+    regex = /\ASprdAuth apiKey=\"test\", data=\"post http:\/\/api.spreadshirt.net\/api\/v1\/orders [0-9]+\", sig=\"[0-9a-f]{40}\", sessionId=\"abcd-1234\"\Z/
+
+    assert SpreadshirtClient.authorize(:post, "/orders", "abcd-1234") =~ regex
   end
 
   def test_url_for
@@ -38,10 +44,12 @@ class SpreadshirtClientTest < Test::Unit::TestCase
   end
 
   def test_headers_for
-    headers = SpreadshirtClient.headers_for(:post, "/basket/1/items", :authorization => true)
+    headers = SpreadshirtClient.headers_for(:post, "/basket/1/items", :authorization => true, :session => "abcd-1234")
 
     assert_equal [:authorization], headers.keys
+
     assert headers[:authorization].include?("SprdAuth")
+    assert headers[:authorization].include?("abcd-1234")
 
     assert_equal({ :params => { :limit => 500 } }, SpreadshirtClient.headers_for(:get, "/shops/1/articles", :params => { :limit => 500 }))
   end

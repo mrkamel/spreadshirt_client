@@ -1,5 +1,6 @@
 
 require "spreadshirt_client/version"
+require "active_support"
 require "rest-client"
 
 module SpreadshirtClient
@@ -14,7 +15,7 @@ module SpreadshirtClient
       @base_url || "http://api.spreadshirt.net/api/v1"
     end
 
-    def authorize(method, path)
+    def authorize(method, path, session = nil)
       time = Time.now.to_i
 
       authorization = [
@@ -23,7 +24,11 @@ module SpreadshirtClient
         "sig=\"#{Digest::SHA1.hexdigest "#{method} #{url_for path} #{time} #{api_secret}"}\""
       ]
 
-      "SprdAuth #{authorization.join ", "}"
+      res = []
+      res.push "SprdAuth #{authorization.join ", "}"
+      res.push "sessionId=\"#{session}\"" if session
+
+      res.join ", "
     end
 
     def url_for(path)
@@ -35,9 +40,9 @@ module SpreadshirtClient
     def headers_for(method_symbol, path, options)
       headers = {}
 
-      headers[:authorization] = authorize(method_for(method_symbol), path) if options[:authorization]
+      headers[:authorization] = authorize(method_for(method_symbol), path, options[:session]) if options[:authorization]
 
-      options.merge headers
+      options.except(:session).merge headers
     end
 
     def method_for(method_symbol)

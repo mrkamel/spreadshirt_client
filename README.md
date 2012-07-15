@@ -23,6 +23,9 @@ to RestClient's DSL.
 # Add an article to a previously created spreadshirt basket.
 SpreadshirtClient.post "/baskets/[basket_id]/items", "<basketItem>...</basketItem>", :authorization => true
 
+# To make a request that requires a valid spreadshirt session.
+SpreadshirtClient.post "/orders", "<order>...</order>", :authorization => true, :session => "..."
+
 # Update a line item.
 SpreadshirtClient.put "/basklets/[basket_id]/items/[item_id]", "<basketItem>...</basketItem>", :authorization => true
 
