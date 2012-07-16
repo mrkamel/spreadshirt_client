@@ -2,10 +2,19 @@
 require "spreadshirt_client/version"
 require "active_support"
 require "rest-client"
+require "timeout"
 
 module SpreadshirtClient
   class << self
     attr_accessor :api_key, :api_secret
+
+    def timeout=(timeout)
+      @timeout = timeout
+    end
+
+    def timeout
+      @timeout || 30
+    end
 
     def base_url=(base_url)
       @base_url = base_url
@@ -50,19 +59,19 @@ module SpreadshirtClient
     end
 
     def put(path, payload, options = {})
-      RestClient.put url_for(path), payload, headers_for(:put, path, options)
+      Timeout::timeout(timeout) { RestClient.put url_for(path), payload, headers_for(:put, path, options) }
     end
 
     def post(path, payload, options = {})
-      RestClient.post url_for(path), payload, headers_for(:post, path, options)
+      Timeout::timeout(timeout) { RestClient.post url_for(path), payload, headers_for(:post, path, options) }
     end
 
     def get(path, options = {})
-      RestClient.get url_for(path), headers_for(:get, path, options)
+      Timeout::timeout(timeout) { RestClient.get url_for(path), headers_for(:get, path, options) }
     end
 
     def delete(path, options = {})
-      RestClient.delete url_for(path), headers_for(:delete, path, options)
+      Timeout::timeout(timeout) { RestClient.delete url_for(path), headers_for(:delete, path, options) }
     end
   end
 end

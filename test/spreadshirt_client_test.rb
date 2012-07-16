@@ -58,6 +58,16 @@ class SpreadshirtClientTest < Test::Unit::TestCase
     assert_equal "POST", SpreadshirtClient.method_for(:post)
   end
 
+  def test_timeout
+    assert_equal 30, SpreadshirtClient.timeout
+
+    SpreadshirtClient.timeout = 5
+
+    assert_equal 5, SpreadshirtClient.timeout
+
+    SpreadshirtClient.timeout = 30
+  end
+
   def test_put
     # Can't be tested.
   end

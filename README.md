@@ -12,6 +12,7 @@ First, you need to setup your API credentials:
 SpreadshirtClient.api_key = "..."
 SpreadshirtClient.api_secret = "..."
 SpreadshirtClient.base_url = "http://api.spreadshirt.net/api/v1" # optional
+SpreadshirtClient.timeout = 5 # optional (default: 30)
 </pre>
 
 ## Usage
