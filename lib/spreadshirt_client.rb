@@ -8,7 +8,7 @@ module SpreadshirtClient
     attr_accessor :api_key, :api_secret
 
     def base_url=(base_url)
-      @base_url
+      @base_url = base_url
     end
 
     def base_url

@@ -21,7 +21,7 @@ class SpreadshirtClientTest < Test::Unit::TestCase
 
     SpreadshirtClient.base_url = "http://test.spreadshirt.net/api/v1"
 
-    assert_equal "http://api.spreadshirt.net/api/v1", SpreadshirtClient.base_url
+    assert_equal "http://test.spreadshirt.net/api/v1", SpreadshirtClient.base_url
 
     SpreadshirtClient.base_url = "http://api.spreadshirt.net/api/v1"
   end
