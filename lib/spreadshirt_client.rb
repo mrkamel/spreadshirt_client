@@ -1,6 +1,6 @@
 
 require "spreadshirt_client/version"
-require "active_support"
+require "rubygems"
 require "rest-client"
 require "timeout"
 
@@ -51,7 +51,9 @@ module SpreadshirtClient
 
       headers[:authorization] = authorize(method_for(method_symbol), path, options[:session]) if options[:authorization]
 
-      options.except(:session).merge headers
+      opts = options.dup
+      opts.delete :session
+      opts.merge headers
     end
 
     def method_for(method_symbol)
