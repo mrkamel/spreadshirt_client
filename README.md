@@ -8,29 +8,39 @@ http://developer.spreadshirt.net
 
 Add this line to your application's Gemfile:
 
-    gem 'spreadshirt_client'
+```
+gem 'spreadshirt_client'
+```
 
 And then execute:
 
-    $ bundle
+```
+$ bundle
+```
+
+Alternatively, you can of course install it without bundler via:
+
+```
+$ gem install spreadshirt_client
+```
 
 ## Setup
 
 First, you need to setup your API credentials:
 
-<pre>
+```ruby
 SpreadshirtClient.api_key = "..."
 SpreadshirtClient.api_secret = "..."
 SpreadshirtClient.base_url = "http://api.spreadshirt.net/api/v1" # optional
 SpreadshirtClient.timeout = 5 # optional (default: 30)
-</pre>
+```
 
 ## Usage
 
 The DSL to interact with the spreadshirt API is similar
 to RestClient's DSL.
 
-<pre>
+```ruby
 # Add an article to a previously created spreadshirt basket.
 SpreadshirtClient.post "/baskets/[basket_id]/items", "<basketItem>...</basketItem>", :authorization => true
 
@@ -47,7 +57,7 @@ SpreadshirtClient.get "/baskets/[basket_id]/checkout", :authorization => true
 SpreadshirtClient.get "/shops/[shop_id]/articles", :params => { :limit => 50 }
 
 ...
-</pre>
+```
 
 Please take a look into the spreadshirt API docs for more details.
 
