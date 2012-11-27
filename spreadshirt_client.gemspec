@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = SpreadshirtClient::VERSION
   s.authors     = ["Benjamin Vetter"]
   s.email       = ["vetter@flakks.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/mrkamel/spreadshirt_client"
   s.summary     = %q{Communicate with the spreadshirt API}
   s.description = %q{Communicate with the spreadshirt API using a DSL similar to the one of RestClient}
 

@@ -4,6 +4,16 @@
 Use this gem to communicate with the spreadshirt API.
 http://developer.spreadshirt.net
 
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'spreadshirt_client'
+
+And then execute:
+
+    $ bundle
+
 ## Setup
 
 First, you need to setup your API credentials:
