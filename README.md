@@ -28,7 +28,7 @@ SpreadshirtClient.post "/baskets/[basket_id]/items", "<basketItem>...</basketIte
 SpreadshirtClient.post "/orders", "<order>...</order>", :authorization => true, :session => "..."
 
 # Update a line item.
-SpreadshirtClient.put "/basklets/[basket_id]/items/[item_id]", "<basketItem>...</basketItem>", :authorization => true
+SpreadshirtClient.put "/baskets/[basket_id]/items/[item_id]", "<basketItem>...</basketItem>", :authorization => true
 
 # Retrieve the checkout url for a spreadshirt basket.
 SpreadshirtClient.get "/baskets/[basket_id]/checkout", :authorization => true
@@ -40,4 +40,12 @@ SpreadshirtClient.get "/shops/[shop_id]/articles", :params => { :limit => 50 }
 </pre>
 
 Please take a look into the spreadshirt API docs for more details.
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
 
