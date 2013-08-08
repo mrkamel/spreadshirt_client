@@ -114,7 +114,7 @@ class Basket < ActiveRecord::Base
   
   private
     def generate_token
-      # Generate a uniq token that may be used instead of the spreadshirt_basket_id to retrieve a basket
+      # Generate a unique token that may be used instead of the spreadshirt_basket_id to retrieve a basket
       # The generated token must have 40 characters according to the spreadshirt API documentation.
       begin
         self.token = SecureRandom.hex(20)
@@ -131,12 +131,12 @@ def current_basket
   if cookies[:basket_token]
     @current_basket = Basket.find_by_token(cookies[:basket_token].to_s)
   else
-    new_basket = current_user.baskets.new
+    new_basket = current_user.baskets.build
     new_basket.shop_id = 1234 # Your SHOP_ID
     if new_basket.save
       cookies[:basket_token] = new_basket.token
-      # Call this function to set the spreadshirt id attribute of the basket
-      # This attribute will be needed if you want to add basket items.
+      # Call this function to set the spreadshirt id attribute of the basket.
+      # This attribute will be needed if you want to add basket items to the spreadshirt basket.
       new_basket.find_or_create_spreadshirt_basket()
       @current_basket = new_basket
     end
