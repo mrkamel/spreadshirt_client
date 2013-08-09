@@ -69,7 +69,7 @@ Create your own basket Model:
 $ rails generate Basket user_id:integer spreadshirt_id:string
 ```
 
-In your migration, don't forget the index:
+In your migration, don't forget the indexes:
 
 ```ruby
 class CreateBaskets < ActiveRecord::Migration
@@ -120,12 +120,13 @@ class Basket < ActiveRecord::Base
   private
     # Create spreadshirt basket with minimal payload.
     def create_spreadshirt_basket
+      # Prefer to use your own XML generator library
       payload =<<EOF
         <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <basket xmlns="http://api.spreadshirt.net">
           <shop id="#{$app_config.shop_id}" /> # Your shop id
         </basket>
-      EOF
+EOF
       
       begin
         self.spreadshirt_id = SpreadshirtClient.post("/baskets", payload, :authorization => true).headers[:location].split("/").last
