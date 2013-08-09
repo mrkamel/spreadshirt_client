@@ -121,7 +121,7 @@ Then, in your application, simply retrieve/create your customer's basket:
 def current_basket
   return @current_basket if @current_basket
 
-  # Use the spreadshirt's basket uuid as a cookie to retrieve the basket
+  # Use spreadshirt's basket id stored in a cookie to retrieve the basket
   @current_basket = Basket.find_by_spreadshirt_id(cookies[:spreadshirt_basket_id])
   @current_basket ||= Basket.create! # Create the basket as it doesn't exist yet
 
