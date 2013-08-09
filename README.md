@@ -67,7 +67,7 @@ SpreadshirtClient.get "/shops/[shop_id]/articles", :params => { :limit => 50 }
 Create your own basket model:
 
 ```bash
-$ rails g Basket spreadshirt_id:string:uniq
+$ rails g model Basket spreadshirt_id:string:uniq
 ```
 
 Run the migration
