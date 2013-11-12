@@ -3,6 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "spreadshirt_client/version"
 
 Gem::Specification.new do |s|
+  s.license     = "MIT"
   s.name        = "spreadshirt_client"
   s.version     = SpreadshirtClient::VERSION
   s.authors     = ["Benjamin Vetter"]
