@@ -13,7 +13,7 @@ module SpreadshirtClient
     end
 
     def timeout
-      @timeout || 30
+      @timeout ||= 30
     end
 
     def base_url=(base_url)
@@ -21,7 +21,7 @@ module SpreadshirtClient
     end
 
     def base_url
-      @base_url || "http://api.spreadshirt.net/api/v1"
+      @base_url ||= "http://api.spreadshirt.net/api/v1"
     end
 
     def authorize(method, path, session = nil)
@@ -50,6 +50,7 @@ module SpreadshirtClient
       headers = {}
 
       headers[:authorization] = authorize(method_for(method_symbol), path, options[:session]) if options[:authorization]
+      headers[:content_type] = "application/xml"
 
       opts = options.dup
       opts.delete :session
