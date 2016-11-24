@@ -50,10 +50,12 @@ module SpreadshirtClient
       headers = {}
 
       headers[:authorization] = authorize(method_for(method_symbol), path, options[:session]) if options[:authorization]
-      headers[:content_type] = "application/xml"
 
       opts = options.dup
       opts.delete :session
+
+      opts[:content_type] ||= "application/xml"
+
       opts.merge headers
     end
 
