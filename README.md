@@ -1,7 +1,10 @@
+
 # SpreadshirtClient
 
+[![Build Status](https://secure.travis-ci.org/mrkamel/spreadshirt_client.png?branch=master)](http://travis-ci.org/mrkamel/spreadshirt_client)
+
 Use this gem to communicate with the spreadshirt API.
-http://developer.spreadshirt.net
+http://developer.spreadshirt.net/
 
 ## Installation
 
@@ -30,7 +33,7 @@ First, you need to setup your API credentials:
 ```ruby
 SpreadshirtClient.api_key = "..."
 SpreadshirtClient.api_secret = "..."
-SpreadshirtClient.base_url = "http://api.spreadshirt.net/api/v1" # optional
+SpreadshirtClient.base_url = "https://api.spreadshirt.net/api/v1" # optional
 SpreadshirtClient.timeout = 5 # optional (default: 30)
 ```
 

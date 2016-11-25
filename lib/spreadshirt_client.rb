@@ -21,7 +21,7 @@ module SpreadshirtClient
     end
 
     def base_url
-      @base_url ||= "http://api.spreadshirt.net/api/v1"
+      @base_url ||= "https://api.spreadshirt.net/api/v1"
     end
 
     def authorize(method, path, session = nil)

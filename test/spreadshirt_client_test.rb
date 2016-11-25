@@ -27,28 +27,28 @@ class SpreadshirtClientTest < SpreadshirtClient::TestCase
   end
 
   def test_base_url
-    assert_equal "http://api.spreadshirt.net/api/v1", SpreadshirtClient.base_url
+    assert_equal "https://api.spreadshirt.net/api/v1", SpreadshirtClient.base_url
 
-    SpreadshirtClient.base_url = "http://test.spreadshirt.net/api/v1"
+    SpreadshirtClient.base_url = "https://test.spreadshirt.net/api/v1"
 
-    assert_equal "http://test.spreadshirt.net/api/v1", SpreadshirtClient.base_url
+    assert_equal "https://test.spreadshirt.net/api/v1", SpreadshirtClient.base_url
 
-    SpreadshirtClient.base_url = "http://api.spreadshirt.net/api/v1"
+    SpreadshirtClient.base_url = "https://api.spreadshirt.net/api/v1"
   end
 
   def test_authorize
-    assert_equal 'SprdAuth apiKey="test", data="post http://api.spreadshirt.net/api/v1/baskets/1/items 1325376000", sig="932555fa9cc0854b03473487af521045dc12d3d0"', SpreadshirtClient.authorize(:post, "/baskets/1/items")
+    assert_equal 'SprdAuth apiKey="test", data="post https://api.spreadshirt.net/api/v1/baskets/1/items 1325376000", sig="4c61addd7c13c7cf01363b0e140dfbfb24c6e377"', SpreadshirtClient.authorize(:post, "/baskets/1/items")
   end
 
   def test_authorize_with_session
-    regex = /\ASprdAuth apiKey=\"test\", data=\"post http:\/\/api.spreadshirt.net\/api\/v1\/orders [0-9]+\", sig=\"[0-9a-f]{40}\", sessionId=\"abcd-1234\"\Z/
+    regex = /\ASprdAuth apiKey=\"test\", data=\"post https:\/\/api.spreadshirt.net\/api\/v1\/orders [0-9]+\", sig=\"[0-9a-f]{40}\", sessionId=\"abcd-1234\"\Z/
 
     assert SpreadshirtClient.authorize(:post, "/orders", "abcd-1234") =~ regex
   end
 
   def test_url_for
-    assert_equal "http://api.spreadshirt.net/api/v1/basket/1/items", SpreadshirtClient.url_for("/basket/1/items")
-    assert_equal "http://test.spreadshirt.net/api/v1/basket/1/items", SpreadshirtClient.url_for("http://test.spreadshirt.net/api/v1/basket/1/items")
+    assert_equal "https://api.spreadshirt.net/api/v1/basket/1/items", SpreadshirtClient.url_for("/basket/1/items")
+    assert_equal "https://test.spreadshirt.net/api/v1/basket/1/items", SpreadshirtClient.url_for("https://test.spreadshirt.net/api/v1/basket/1/items")
   end
 
   def test_headers_for
@@ -77,25 +77,25 @@ class SpreadshirtClientTest < SpreadshirtClient::TestCase
   end
 
   def test_put
-    RestClient.expects(:put).with("http://api.spreadshirt.net/api/v1/baskets/1/items/1", "payload", :authorization => 'SprdAuth apiKey="test", data="PUT http://api.spreadshirt.net/api/v1/baskets/1/items/1 1325376000", sig="2f7a28edc68bbec83a8a580bbd1506ba9192f68e"', :content_type => "application/xml").returns(200)
+    RestClient.expects(:put).with("https://api.spreadshirt.net/api/v1/baskets/1/items/1", "payload", :authorization => 'SprdAuth apiKey="test", data="PUT https://api.spreadshirt.net/api/v1/baskets/1/items/1 1325376000", sig="e8d0b7f085f976b4486ed8e58b187fcf8181f576"', :content_type => "application/xml").returns(200)
 
     assert_equal 200, SpreadshirtClient.put("/baskets/1/items/1", "payload", :authorization => true)
   end
 
   def test_post
-    RestClient.expects(:post).with("http://api.spreadshirt.net/api/v1/baskets", "payload", :authorization => 'SprdAuth apiKey="test", data="POST http://api.spreadshirt.net/api/v1/baskets 1325376000", sig="04097ac87eadc5d6d0766b2dabf509ebc35eb3bc"', :content_type => "application/xml").returns(200)
+    RestClient.expects(:post).with("https://api.spreadshirt.net/api/v1/baskets", "payload", :authorization => 'SprdAuth apiKey="test", data="POST https://api.spreadshirt.net/api/v1/baskets 1325376000", sig="261791c8c28dd7e813c5bff70c012a6a431dea66"', :content_type => "application/xml").returns(200)
 
     assert_equal 200, SpreadshirtClient.post("/baskets", "payload", :authorization => true)
   end
 
   def test_get
-    RestClient.expects(:get).with("http://api.spreadshirt.net/api/v1/orders/1", :authorization => 'SprdAuth apiKey="test", data="GET http://api.spreadshirt.net/api/v1/orders/1 1325376000", sig="7f06c7604b97b682c545262bd9acbbaf04eb8fcd", sessionId="abcd-1234"', :content_type => "application/xml").returns(200)
+    RestClient.expects(:get).with("https://api.spreadshirt.net/api/v1/orders/1", :authorization => 'SprdAuth apiKey="test", data="GET https://api.spreadshirt.net/api/v1/orders/1 1325376000", sig="594442cc4dfb6c09163e753f50199ce9caf1c14f", sessionId="abcd-1234"', :content_type => "application/xml").returns(200)
 
     assert_equal 200, SpreadshirtClient.get("/orders/1", :authorization => true, :session => "abcd-1234")
   end
 
   def test_delete
-    RestClient.expects(:delete).with("http://api.spreadshirt.net/api/v1/baskets/1/items/1", :authorization => 'SprdAuth apiKey="test", data="DELETE http://api.spreadshirt.net/api/v1/baskets/1/items/1 1325376000", sig="010f76d9c0a01278872a897b72bcac4daf0109cf"', :content_type => "application/xml").returns(200)
+    RestClient.expects(:delete).with("https://api.spreadshirt.net/api/v1/baskets/1/items/1", :authorization => 'SprdAuth apiKey="test", data="DELETE https://api.spreadshirt.net/api/v1/baskets/1/items/1 1325376000", sig="0675841d32f61f15d047ea0b6419fc22f78e2ed6"', :content_type => "application/xml").returns(200)
 
     assert_equal 200, SpreadshirtClient.delete("/baskets/1/items/1", :authorization => true)
   end
